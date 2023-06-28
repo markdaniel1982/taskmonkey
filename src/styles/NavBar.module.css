@@ -1,5 +1,13 @@
 .NavBar {
     background-color: whitesmoke;
-    border: 2px solid slategray;
-    
+    border-bottom: 1px solid  slategray;
+    border-radius: 15px;
+}
+
+.NavLink {
+    padding: 5px;
+}
+
+.Active i {
+    color: darksalmon;
 }
