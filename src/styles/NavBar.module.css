@@ -1,6 +1,6 @@
 .NavBar {
     background-color: whitesmoke;
-    border-bottom: 1px solid  slategray;
+    border-bottom: 1px solid  #5f787b;
     border-radius: 15px;
 }
 
@@ -9,5 +9,5 @@
 }
 
 .Active i {
-    color: darksalmon;
+    color: #eab354;
 }

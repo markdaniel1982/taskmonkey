@@ -36,7 +36,7 @@
 .BlueOutline:hover,
 .Bright:hover {
   background-color: #eab354;
-  color: slategray;
+  color: #5f787b;
 }
 
 .BlueOutline,
@@ -64,6 +64,6 @@
 }
 
 .Bright {
-  background-color: slategray;
+  background-color: #5f787b;
   color: #eab354;
 }
