@@ -14,39 +14,62 @@ import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 
 function TaskCreateForm() {
-
   const [errors, setErrors] = useState({});
 
   const [taskData, setTaskData] = useState({
-    'title': "",
-    'content': "",
-    'priority': "",
-    'due_date': "",
-    'privacy': "",
-    'status': "",
-    'attachments': "",
+    title: "",
+    content: "",
+    priority: "",
+    due_date: "",
+    privacy: "",
+    status: "",
+    attachments: "",
   });
-  const { title, content, priority, due_date, privacy, status, attachments } = taskData;
-
+  const { title, content, priority, due_date, privacy, status, attachments } =
+    taskData;
 
   const handleChange = (event) => {
     setTaskData({
-        ...taskData,
-        [event.target.name]: event.target.value,
+      ...taskData,
+      [event.target.name]: event.target.value,
     });
   };
-
 
   const textFields = (
     <div className="text-center">
       <Form.Group>
         <Form.Label>Task title</Form.Label>
-        <Form.Control type="text" name="title" value={title} onChange={handleChange}></Form.Control>
+        <Form.Control
+          type="text"
+          name="title"
+          value={title}
+          onChange={handleChange}
+        ></Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control as="textarea" rows={6} name="content" ></Form.Control>
+        <Form.Control as="textarea" rows={6} name="content" />
       </Form.Group>
+      <Form.Group>
+        <Form.Label>Priority</Form.Label>
+        <Form.Control as="select" name="priority"/>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Due Date</Form.Label>
+        <Form.Control type="date" name="duedate" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Privacy</Form.Label>
+        <Form.Control as="select" name="privacy" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Status</Form.Label>
+        <Form.Control as="select" name="status" />
+      </Form.Group>
+      {/* <Form.Group controlId="formFileMultiple" className="mb-3">
+      <Form.Label>Attachments</Form.Label>
+        <Form.Control type="file" multiple rows={5}/>
+      </Form.Group> */}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -68,14 +91,15 @@ function TaskCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="attachments"
-                >
-                  <Asset src={Upload} message="Click or tap to upload a file (Max 5mb)" />
-                </Form.Label>
-
+              <Form.Label
+                className="d-flex justify-content-center"
+                htmlFor="attachments"
+              >
+                <Asset
+                  src={Upload}
+                  message="Click or tap to upload a file (Max 5mb)"
+                />
+              </Form.Label>
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
           </Container>
