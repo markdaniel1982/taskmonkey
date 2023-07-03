@@ -12,17 +12,19 @@ import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
+import { Alert, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
 
+//   const priority_options = (Urgent: urgent), (Normal: normal), (Low: low);
+
   const [taskData, setTaskData] = useState({
     title: "",
     content: "",
-    priority: "",
+    priority: {priority_options},
     due_date: "",
     privacy: "",
     status: "",
@@ -64,8 +66,8 @@ function TaskCreateForm() {
     formData.append("attachments", attachmentsInput.current.files[0])
 
     try {
-        const {data} = await axiosReq.post("/tasks/", formData);
-        history.push(`/posts/${data.id}`)
+        const { data } = await axiosReq.post("/tasks/", formData);
+        history.push(`/tasks/${data.id}`)
     } catch (err) {
         console.log(err)
         if (err.response?.status !== 401){
@@ -73,6 +75,8 @@ function TaskCreateForm() {
         }
     }
   }
+
+  
 
   const textFields = (
     <div className="text-center">
@@ -85,6 +89,11 @@ function TaskCreateForm() {
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -95,6 +104,11 @@ function TaskCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
         <Form.Label>Priority</Form.Label>
         <Form.Control
@@ -102,21 +116,33 @@ function TaskCreateForm() {
           name="priority"
           value={priority}
           onChange={handleChange}
+          
         >
-          <option>Urgent</option>
+            <option>{priority_options}</option>
+          {/* <option>Urgent</option>
           <option>Normal</option>
-          <option>Low</option>
+          <option>Low</option> */}
         </Form.Control>
       </Form.Group>
+      {errors?.priority?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
         <Form.Label>Due Date</Form.Label>
         <Form.Control
           type="date"
-          name="duedate"
+          name="due_date"
           value={due_date}
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.due_date?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
         <Form.Label>Privacy</Form.Label>
         <Form.Control
@@ -129,6 +155,11 @@ function TaskCreateForm() {
           <option>Public</option>
         </Form.Control>
       </Form.Group>
+      {errors?.privacy?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       <Form.Group>
         <Form.Label>Status</Form.Label>
         <Form.Control
@@ -143,6 +174,11 @@ function TaskCreateForm() {
           <option>Complete</option>
         </Form.Control>
       </Form.Group>
+      {errors?.status?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       {/* <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Attachments</Form.Label>
         <Form.Control
@@ -155,7 +191,7 @@ function TaskCreateForm() {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Orange}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
@@ -216,6 +252,11 @@ function TaskCreateForm() {
                 ref={attachmentsInput}
               />
             </Form.Group>
+            {errors?.attachments?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
