@@ -48,36 +48,57 @@ function TaskCreateForm() {
       </Form.Group>
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control as="textarea" rows={6} name="content" />
+        <Form.Control as="textarea" rows={6} name="content" value={content} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Priority</Form.Label>
-        <Form.Control as="select" name="priority"/>
+        <Form.Control as="select" name="priority" value={priority}>
+          <option>Urgent</option>
+          <option>Normal</option>
+          <option>Low</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label>Due Date</Form.Label>
-        <Form.Control type="date" name="duedate" />
+        <Form.Control type="date" name="duedate" value={due_date} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Privacy</Form.Label>
-        <Form.Control as="select" name="privacy" />
+        <Form.Control as="select" name="privacy" value={privacy}>
+          <option>Private</option>
+          <option>Public</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label>Status</Form.Label>
-        <Form.Control as="select" name="status" />
+        <Form.Control as="select" name="status" value={status}>
+          <option>Not Started</option>
+          <option>In Progress</option>
+          <option>On Hold</option>
+          <option>Complete</option>
+        </Form.Control>
       </Form.Group>
-      {/* <Form.Group controlId="formFileMultiple" className="mb-3">
-      <Form.Label>Attachments</Form.Label>
-        <Form.Control type="file" multiple rows={5}/>
-      </Form.Group> */}
+      <Form.Group controlId="formFileMultiple" className="mb-3">
+        <Form.Label>Attachments</Form.Label>
+        <Form.Control
+          type="file"
+          multiple
+          rows={5}
+          name="attachments"
+          value={attachments}
+        ></Form.Control>
+      </Form.Group>
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Orange}`}
         onClick={() => {}}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Orange}`}
+        type="submit"
+      >
         create
       </Button>
     </div>
@@ -86,14 +107,17 @@ function TaskCreateForm() {
   return (
     <Form>
       <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+        <Col md={5} lg={8} className="d-none d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+        <Col className="py-2 p-0 p-md-2" md={7} lg={4}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
               <Form.Label
                 className="d-flex justify-content-center"
-                htmlFor="attachments"
+                htmlFor="Upload"
               >
                 <Asset
                   src={Upload}
@@ -103,9 +127,6 @@ function TaskCreateForm() {
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
           </Container>
-        </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
     </Form>
