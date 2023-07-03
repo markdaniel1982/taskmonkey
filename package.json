@@ -46,10 +46,12 @@
   },
   "devDependencies": {
     "@types/history": "^5.0.0",
+    "@types/react": "^18.2.14",
+    "@types/react-router-dom": "^5.3.3",
     "msw": "^0.35.0"
   },
   "engines": {
-    "node": "16.19.1",
-    "npm": "8.19.3"
+    "node": "16.20.1",
+    "npm": "8.19.4"
   }
 }

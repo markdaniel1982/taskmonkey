@@ -16,15 +16,14 @@ import { Alert, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
+
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
-
-//   const priority_options = (Urgent: urgent), (Normal: normal), (Low: low);
 
   const [taskData, setTaskData] = useState({
     title: "",
     content: "",
-    priority: {priority_options},
+    priority: "",
     due_date: "",
     privacy: "",
     status: "",
@@ -116,12 +115,10 @@ function TaskCreateForm() {
           name="priority"
           value={priority}
           onChange={handleChange}
-          
         >
-            <option>{priority_options}</option>
-          {/* <option>Urgent</option>
-          <option>Normal</option>
-          <option>Low</option> */}
+          <option value="1">URGENT</option>
+          <option value="2">Normal</option>
+          <option value="3">Low</option>
         </Form.Control>
       </Form.Group>
       {errors?.priority?.map((message, idx) => (
@@ -151,8 +148,8 @@ function TaskCreateForm() {
           value={privacy}
           onChange={handleChange}
         >
-          <option>Private</option>
-          <option>Public</option>
+          <option value="1">Private</option>
+          <option value="2">Public</option>
         </Form.Control>
       </Form.Group>
       {errors?.privacy?.map((message, idx) => (
@@ -168,10 +165,10 @@ function TaskCreateForm() {
           value={status}
           onChange={handleChange}
         >
-          <option>Not Started</option>
-          <option>In Progress</option>
-          <option>On Hold</option>
-          <option>Complete</option>
+          <option value="1">Not Started</option>
+          <option value="2">In Progress</option>
+          {/* <option>On Hold</option> */}
+          <option value="3">Complete</option>
         </Form.Control>
       </Form.Group>
       {errors?.status?.map((message, idx) => (
@@ -179,15 +176,7 @@ function TaskCreateForm() {
           {message}
         </Alert>
       ))}
-      {/* <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Attachments</Form.Label>
-        <Form.Control
-          type="file"
-          name="attachments"
-          value={attachments}
-          onChange={handleChangeAttachments}
-        ></Form.Control>
-      </Form.Group> */}
+
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Orange}`}
