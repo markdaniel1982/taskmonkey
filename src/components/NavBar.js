@@ -32,7 +32,7 @@ const NavBar = () => {
       activeClassName={styles.Active}
       to="/tasks/create"
     >
-      <i class="fa-solid fa-plus"></i>Add Task
+      <i className="fa-solid fa-plus"></i>Add Task
     </NavLink>
   );
   const loggedInIcons = (
@@ -42,14 +42,14 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/tasks"
       >
-        <i class="fa-solid fa-list"></i>Task List
+        <i className="fa-solid fa-list"></i>Task List
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/completed"
       >
-        <i class="fa-solid fa-check"></i>Completed tasks
+        <i className="fa-solid fa-check"></i>Completed tasks
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out

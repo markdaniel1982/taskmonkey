@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -13,6 +13,8 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
@@ -28,6 +30,9 @@ function TaskCreateForm() {
   });
   const { title, content, priority, due_date, privacy, status, attachments } =
     taskData;
+
+  const attachmentsInput = useRef(null)
+  const history = useHistory()
 
   const handleChange = (event) => {
     setTaskData({
@@ -45,6 +50,29 @@ function TaskCreateForm() {
       });
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+
+    formData.append("title", title)
+    formData.append("content", content)
+    formData.append("priority", priority)
+    formData.append("due_date", due_date)
+    formData.append("privacy", privacy)
+    formData.append("status", status)
+    formData.append("attachments", attachmentsInput.current.files[0])
+
+    try {
+        const {data} = await axiosReq.post("/tasks/", formData);
+        history.push(`/posts/${data.id}`)
+    } catch (err) {
+        console.log(err)
+        if (err.response?.status !== 401){
+            setErrors(err.response?.data)
+        }
+    }
+  }
 
   const textFields = (
     <div className="text-center">
@@ -140,9 +168,8 @@ function TaskCreateForm() {
     </div>
   );
 
-
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col md={5} lg={8} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
@@ -184,10 +211,9 @@ function TaskCreateForm() {
 
               <Form.File
                 id="attachments"
-                // type="file"
-                // name="attachments"
-                // value={attachments}
+                accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onChange={handleChangeAttachments}
+                ref={attachmentsInput}
               />
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
