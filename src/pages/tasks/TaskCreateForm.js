@@ -12,6 +12,7 @@ import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { Image } from "react-bootstrap";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
@@ -35,6 +36,16 @@ function TaskCreateForm() {
     });
   };
 
+  const handleChangeAttachments = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(attachments);
+      setTaskData({
+        ...taskData,
+        attachments: URL.createObjectURL(event.target.files[0]),
+      });
+    }
+  };
+
   const textFields = (
     <div className="text-center">
       <Form.Group>
@@ -48,11 +59,22 @@ function TaskCreateForm() {
       </Form.Group>
       <Form.Group>
         <Form.Label>Content</Form.Label>
-        <Form.Control as="textarea" rows={6} name="content" value={content} />
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
       </Form.Group>
       <Form.Group>
         <Form.Label>Priority</Form.Label>
-        <Form.Control as="select" name="priority" value={priority}>
+        <Form.Control
+          as="select"
+          name="priority"
+          value={priority}
+          onChange={handleChange}
+        >
           <option>Urgent</option>
           <option>Normal</option>
           <option>Low</option>
@@ -60,34 +82,48 @@ function TaskCreateForm() {
       </Form.Group>
       <Form.Group>
         <Form.Label>Due Date</Form.Label>
-        <Form.Control type="date" name="duedate" value={due_date} />
+        <Form.Control
+          type="date"
+          name="duedate"
+          value={due_date}
+          onChange={handleChange}
+        />
       </Form.Group>
       <Form.Group>
         <Form.Label>Privacy</Form.Label>
-        <Form.Control as="select" name="privacy" value={privacy}>
+        <Form.Control
+          as="select"
+          name="privacy"
+          value={privacy}
+          onChange={handleChange}
+        >
           <option>Private</option>
           <option>Public</option>
         </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label>Status</Form.Label>
-        <Form.Control as="select" name="status" value={status}>
+        <Form.Control
+          as="select"
+          name="status"
+          value={status}
+          onChange={handleChange}
+        >
           <option>Not Started</option>
           <option>In Progress</option>
           <option>On Hold</option>
           <option>Complete</option>
         </Form.Control>
       </Form.Group>
-      <Form.Group controlId="formFileMultiple" className="mb-3">
+      {/* <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Attachments</Form.Label>
         <Form.Control
           type="file"
-          multiple
-          rows={5}
           name="attachments"
           value={attachments}
+          onChange={handleChangeAttachments}
         ></Form.Control>
-      </Form.Group>
+      </Form.Group> */}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Orange}`}
@@ -104,6 +140,7 @@ function TaskCreateForm() {
     </div>
   );
 
+
   return (
     <Form>
       <Row>
@@ -115,15 +152,43 @@ function TaskCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              <Form.Label
-                className="d-flex justify-content-center"
-                htmlFor="Upload"
-              >
-                <Asset
-                  src={Upload}
-                  message="Click or tap to upload a file (Max 5mb)"
-                />
-              </Form.Label>
+              {attachments ? (
+                <>
+                  <figure>
+                    <Image
+                      className={appStyles.Image}
+                      src={attachments}
+                      rounded
+                    />
+                  </figure>
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
+                      htmlFor="attachments"
+                    >
+                      Change the file
+                    </Form.Label>
+                  </div>
+                </>
+              ) : (
+                <Form.Label
+                  className="d-flex justify-content-center"
+                  htmlFor="attachments"
+                >
+                  <Asset
+                    src={Upload}
+                    message="Click or tap to upload a file (Max 5mb)"
+                  />
+                </Form.Label>
+              )}
+
+              <Form.File
+                id="attachments"
+                // type="file"
+                // name="attachments"
+                // value={attachments}
+                onChange={handleChangeAttachments}
+              />
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
           </Container>
