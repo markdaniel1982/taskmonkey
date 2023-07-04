@@ -42,7 +42,7 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}/tasks`}
       >
-        <i className="fa-solid fa-list"></i>Task List
+        <i className="fa-solid fa-list"></i>In Progress
       </NavLink>
       <NavLink
         className={styles.NavLink}
