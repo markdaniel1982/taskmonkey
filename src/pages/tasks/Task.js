@@ -27,7 +27,7 @@ const Task = (props) => {
   const is_owner = currentUser?.username === owner;
 
 
-  console.log(profile_image, "<=======profile id")
+  console.log(profile_id, "<=======profile id")
 
   return (
     <Card className={styles.Task}>
@@ -37,8 +37,8 @@ const Task = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
-            {owner}
-            <Avatar src={profile_id?.profile_image} height={55} />
+            <Avatar src={profile_image} text={owner} height={40} />
+            
           </Link>
           <div className="d-flex align-items-center">
             <span>date {updated_on}{is_owner && taskPage && "..."}</span>
@@ -64,7 +64,7 @@ const Task = (props) => {
       </Card.Body>
 
       <Link to={`/profiles/${currentUser?.profile_id}/tasks/${id}`}>
-        <Card.Img src={attachments} alt={title} />
+        <Card.Img src={attachments} alt={attachments} />
       </Link>
     </Card>
   );

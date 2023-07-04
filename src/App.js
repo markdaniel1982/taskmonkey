@@ -10,10 +10,12 @@ import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import TasksPage from "./pages/tasks/TasksPage";
+import Task from "./pages/tasks/Task";
+
 
 function App() {
   const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";
+  const profile_id = currentUser?.profile_id || "";  
 
   return (
     <div className={styles.App}>
@@ -29,17 +31,18 @@ function App() {
           />
           <Route
             exact
-            path={`/profiles/${currentUser?.profile_id}/tasks`}
+            path={"/in-progress"}
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
-                filter={`owner__profile=${currentUser?.profile_id}__tasks&`}
+                // filter={`tasks__owner__profile__status=${profile_id}&ordering=-status__in-progress&`}
+                filter={`${Task.status===2}`}
               />
             )}
           />
           <Route
             exact
-            path={`/profiles/${currentUser?.profile_id}/tasks/completed`}
+            path={"/completed"}
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
