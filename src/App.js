@@ -24,7 +24,7 @@ function App() {
             exact
             path="/"
             render={() => (
-              <TasksPage message="The monkey couldn't find anything with those keywords. Try another , or throw a banana or something" />
+              <TasksPage message="The monkey couldn't find anything with those keywords. Try another, or throw a banana or something" />
             )}
           />
           <Route
@@ -32,8 +32,8 @@ function App() {
             path={`/profiles/${currentUser?.profile_id}/tasks`}
             render={() => (
               <TasksPage
-                message="The monkey couldn't fin d anything"
-                filter={`owner__tasks__owner__profile=${profile_id}&`}
+                message="The monkey couldn't find anything"
+                filter={`owner__profile=${currentUser?.profile_id}__tasks&`}
               />
             )}
           />

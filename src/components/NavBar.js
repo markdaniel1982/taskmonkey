@@ -40,14 +40,14 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/tasks"
+        to={`/profiles/${currentUser?.profile_id}/tasks`}
       >
         <i className="fa-solid fa-list"></i>Task List
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/completed"
+        to={`/profiles/${currentUser?.profile_id}/tasks/completed`}
       >
         <i className="fa-solid fa-check"></i>Completed tasks
       </NavLink>
