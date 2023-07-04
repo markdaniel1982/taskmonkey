@@ -1,3 +1,22 @@
+const [filterParam, setFilterParam] = useState(["All"]);
+<select
+  onChange={(e) => {
+    setFilterParam(e.target.value);
+  }}
+  className="status-filter"
+  aria-label="status filter"
+>
+  <option value="All" to={"/"}>
+    All tasks
+  </option>
+  <option value="1">Not Started</option>
+  <option value="2" to={"/in-progress"}>
+    In Progress
+  </option>
+  <option valie="3">Completed</option>
+</select>;
+
+
 import React, { useEffect, useState } from "react";
 
 import Form from "react-bootstrap/Form";
@@ -15,7 +34,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchMoreData } from "../../utils/utils";
+// import { fetchMoreData } from "../../utils/utils";
 
 function TasksPage({ message, filter = "" }) {
   const [tasks, setTasks] = useState({ results: [] });
@@ -37,7 +56,7 @@ function TasksPage({ message, filter = "" }) {
 
     setHasLoaded(false);
     const timer = setTimeout(() => {
-      fetchTasks();
+      fetchPosts();
     }, 1000);
 
     return () => {

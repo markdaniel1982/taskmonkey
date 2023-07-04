@@ -13,6 +13,7 @@ import TasksPage from "./pages/tasks/TasksPage";
 import Task from "./pages/tasks/Task";
 
 
+
 function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";  
