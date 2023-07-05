@@ -10,8 +10,7 @@ import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import TasksPage from "./pages/tasks/TasksPage";
-import Task from "./pages/tasks/Task";
-
+// import Task from "./pages/tasks/Task";
 
 
 function App() {
@@ -36,8 +35,8 @@ function App() {
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
-                // filter={`tasks__owner__profile__status=${profile_id}&ordering=-status__in-progress&`}
-                filter={`${Task.status===2}`}
+                // filter={`tasks__owner__profile${Task?.owner === profile_id}__status=${2}&ordering=-status__in-progress&`}
+                // filter={`${Task.status===2}`}
               />
             )}
           />

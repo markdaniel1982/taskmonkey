@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,16 +6,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
-import Upload from "../../assets/Upload.png";
-
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { Alert, Image } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
-
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
@@ -27,13 +23,10 @@ function TaskCreateForm() {
     due_date: "",
     privacy: "",
     status: "",
-    attachments: "",
   });
-  const { title, content, priority, due_date, privacy, status, attachments } =
-    taskData;
+  const { title, content, priority, due_date, privacy, status } = taskData;
 
-  const attachmentsInput = useRef(null)
-  const history = useHistory()
+  const history = useHistory();
 
   const handleChange = (event) => {
     setTaskData({
@@ -42,40 +35,27 @@ function TaskCreateForm() {
     });
   };
 
-  const handleChangeAttachments = (event) => {
-    if (event.target.files.length) {
-      URL.revokeObjectURL(attachments);
-      setTaskData({
-        ...taskData,
-        attachments: URL.createObjectURL(event.target.files[0]),
-      });
-    }
-  };
-
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const formData = new FormData();
 
-    formData.append("title", title)
-    formData.append("content", content)
-    formData.append("priority", priority)
-    formData.append("due_date", due_date)
-    formData.append("privacy", privacy)
-    formData.append("status", status)
-    formData.append("attachments", attachmentsInput.current.files[0])
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("priority", priority);
+    formData.append("due_date", due_date);
+    formData.append("privacy", privacy);
+    formData.append("status", status);
 
     try {
-        const { data } = await axiosReq.post("/tasks/", formData);
-        history.push(`/tasks/${data.id}`)
+      const { data } = await axiosReq.post("/tasks/", formData);
+      history.push(`/tasks/${data.id}`);
     } catch (err) {
-        console.log(err)
-        if (err.response?.status !== 401){
-            setErrors(err.response?.data)
-        }
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
     }
-  }
-
-  
+  };
 
   const textFields = (
     <div className="text-center">
@@ -167,8 +147,8 @@ function TaskCreateForm() {
         >
           <option value="1">Not Started</option>
           <option value="2">In Progress</option>
-          {/* <option>On Hold</option> */}
           <option value="3">Complete</option>
+          <option value="4">On Hold</option>
         </Form.Control>
       </Form.Group>
       {errors?.status?.map((message, idx) => (
@@ -176,7 +156,6 @@ function TaskCreateForm() {
           {message}
         </Alert>
       ))}
-
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Orange}`}
@@ -202,50 +181,7 @@ function TaskCreateForm() {
         <Col className="py-2 p-0 p-md-2" md={7} lg={4}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
-            <Form.Group className="text-center">
-              {attachments ? (
-                <>
-                  <figure>
-                    <Image
-                      className={appStyles.Image}
-                      src={attachments}
-                      rounded
-                    />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
-                      htmlFor="attachments"
-                    >
-                      Change the file
-                    </Form.Label>
-                  </div>
-                </>
-              ) : (
-                <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="attachments"
-                >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload a file (Max 5mb)"
-                  />
-                </Form.Label>
-              )}
-
-              <Form.File
-                id="attachments"
-                accept="image/*,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                onChange={handleChangeAttachments}
-                ref={attachmentsInput}
-              />
-            </Form.Group>
-            {errors?.attachments?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+          >           
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>

@@ -18,7 +18,6 @@ const Task = (props) => {
     due_date,
     privacy,
     status,
-    attachments,
     updated_on,
     taskPage,
   } = props;
@@ -26,8 +25,7 @@ const Task = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
-
-  console.log(profile_id, "<=======profile id")
+  console.log(profile_id, "<=======profile id");
 
   return (
     <Card className={styles.Task}>
@@ -36,12 +34,14 @@ const Task = (props) => {
       </Card.Body>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
+          <Link to={`/profiles/${currentUser}`}>
             <Avatar src={profile_image} text={owner} height={40} />
-            
           </Link>
           <div className="d-flex align-items-center">
-            <span>date {updated_on}{is_owner && taskPage && "..."}</span>
+            <span>
+              date {updated_on}
+              {is_owner && taskPage && "..."}
+            </span>
           </div>
         </Media>
       </Card.Body>
@@ -56,16 +56,12 @@ const Task = (props) => {
       <Card.Body>{status && <Card.Text>Status: {status}</Card.Text>}</Card.Body>
       <Card.Body>
         <div className={styles.taskBar}>
-          <Link to={`/profiles/${profile_id}/tasks/${id}`}>
+          <Link to={`/profiles/${currentUser}/tasks/${id}`}>
             <i className="far fa-comments" />
           </Link>
           {comments_count}
         </div>
       </Card.Body>
-
-      <Link to={`/profiles/${currentUser?.profile_id}/tasks/${id}`}>
-        <Card.Img src={attachments} alt={attachments} />
-      </Link>
     </Card>
   );
 };
