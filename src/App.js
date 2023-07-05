@@ -15,7 +15,8 @@ import TasksPage from "./pages/tasks/TasksPage";
 
 function App() {
   const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";  
+  const profile_id = currentUser?.profile_id || "";
+//   const status = task_id.status;
 
   return (
     <div className={styles.App}>
@@ -35,6 +36,7 @@ function App() {
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
+                filter={`tasks__owner == ${profile_id}__status === 2 `}
                 // filter={`tasks__owner__profile${Task?.owner === profile_id}__status=${2}&ordering=-status__in-progress&`}
                 // filter={`${Task.status===2}`}
               />
