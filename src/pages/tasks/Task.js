@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card } from "react-bootstrap";
+import { Card, Media, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { Link, useHistory } from "react-router-dom";
 import { MoreDropdown } from "../../components/MoreDropDown";
 import { axiosRes } from "../../api/axiosDefaults";
-// import Avatar from "../../components/Avatar";
+import Avatar from "../../components/Avatar";
 
 const Task = (props) => {
   const {
     id,
     owner,
     comments_count,
+    profile_image,
     title,
     content,
     priority,
@@ -20,7 +21,6 @@ const Task = (props) => {
     privacy,
     status,
     updated_on,
-    created_on,
     taskPage,
   } = props;
 
@@ -45,16 +45,23 @@ const Task = (props) => {
     <Container className={styles.Task}>
       {is_owner && Task && (
         <Card>
-          <div className="d-flex align-items-center">
-            {created_on}
-            <span>{updated_on}</span>
-            {is_owner && taskPage && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
-            )}
-          </div>
+          <Card.Body>
+            <Media>
+              <Link to={`/profiles/${id}`}>
+                <Avatar src={profile_image} height={50} />
+                {owner}
+              </Link>
+
+              <div className="d-flex align-items-center">
+                {is_owner && taskPage && (
+                  <MoreDropdown
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                  />
+                )}
+              </div>
+            </Media>
+          </Card.Body>
           <Card.Body>
             <Card.Body>{title && <Card.Text>{title}</Card.Text>}</Card.Body>
           </Card.Body>
@@ -69,7 +76,6 @@ const Task = (props) => {
           <Card.Body>
             {status && <Card.Text>Status: {status}</Card.Text>}
           </Card.Body>
-
           <Card.Body>
             <div>
               <Link to={`/tasks/${id}`}>
@@ -77,6 +83,11 @@ const Task = (props) => {
               </Link>
               {comments_count}
             </div>
+            <Row className="align-self-left mx-auto date-container">
+              <span className="font-weight-light small text-muted">
+                Last updated: {updated_on}
+              </span>
+            </Row>
           </Card.Body>
         </Card>
       )}

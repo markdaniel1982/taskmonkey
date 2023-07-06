@@ -1,9 +1,21 @@
 .Task {
   background-color: #ffffff;
-  border: 1px solid #dadadf;
-  border-radius: 5px;
   margin-bottom: 16px;
   text-align: center;
+}
+
+.Owner {
+    height: 40px;
+}
+
+.Media {
+    height: 40px;
+    align-items: center;
+}
+
+.Media-Body {
+    flex: none;
+    padding-left: 1.25rem;
 }
 
 .Task figure,
