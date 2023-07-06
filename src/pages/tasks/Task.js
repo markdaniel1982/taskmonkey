@@ -42,9 +42,9 @@ const Task = (props) => {
   };
 
   return (
-    <Container>
+    <Container className={styles.Task}>
       {is_owner && Task && (
-        <Card className={styles.Task}>
+        <Card>
           <div className="d-flex align-items-center">
             {created_on}
             <span>{updated_on}</span>
@@ -71,7 +71,7 @@ const Task = (props) => {
           </Card.Body>
 
           <Card.Body>
-            <div className={styles.taskBar}>
+            <div>
               <Link to={`/tasks/${id}`}>
                 <i className="far fa-comments" />
               </Link>
