@@ -38,7 +38,7 @@ function App() {
               <TasksPage
                 message="The monkey couldn't find anything"
                 // eslint-disable-next-line no-restricted-globals
-                filter={`owner__profile__task__status=${2}`}
+                filter={`currentUser__${profile_id}?__owner__status=${2}`}
               />
             )}
           />
