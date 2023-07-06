@@ -64,7 +64,6 @@ function TaskPage() {
           )}
         </Container>
       </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2"></Col>
     </Row>
   );
 }

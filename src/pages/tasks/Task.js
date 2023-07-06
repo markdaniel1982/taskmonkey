@@ -52,7 +52,7 @@ const Task = (props) => {
                 {owner}
               </Link>
 
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center justify-content-center">
                 {is_owner && taskPage && (
                   <MoreDropdown
                     handleEdit={handleEdit}
