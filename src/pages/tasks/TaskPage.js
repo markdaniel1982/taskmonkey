@@ -76,7 +76,7 @@ function TaskPage() {
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
           ) : (
-            <span>No comments... yet</span>
+            <span></span>
           )}
         </Container>
       </Col>
