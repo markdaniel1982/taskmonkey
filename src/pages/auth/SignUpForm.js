@@ -8,13 +8,13 @@ import appStyles from "../../App.module.css";
 import {
   Form,
   Button,
-  Image,
   Col,
   Row,
   Container,
   Alert,
 } from "react-bootstrap";
 import axios from "axios";
+import LogoComponent from "../../components/LogoComponent";
 
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
@@ -123,17 +123,7 @@ const SignUpForm = () => {
           </Link>
         </Container>
       </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
-      >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={
-            "https://res.cloudinary.com/dexpjjntx/image/upload/v1687949371/taskmonkey_p5rppm.png"
-          }
-        />
-      </Col>
+      <LogoComponent />
     </Row>
   );
 };
