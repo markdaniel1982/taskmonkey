@@ -10,21 +10,22 @@ import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
+//   const taskPriority = axiosReq.get("/tasks/priority");
 
   const [taskData, setTaskData] = useState({
     title: "",
     content: "",
-    priority: "",
     due_date: "",
     privacy: "",
+    priority: "",
     status: "",
   });
-  const { title, content, priority, due_date, privacy, status } = taskData;
+  const { title, content, due_date, privacy, priority, status } = taskData;
 
   const history = useHistory();
 
@@ -96,6 +97,7 @@ function TaskCreateForm() {
           value={priority}
           onChange={handleChange}
         >
+          <option>--- Select a priority ---</option>
           <option value="1">URGENT</option>
           <option value="2">Normal</option>
           <option value="3">Low</option>
@@ -177,13 +179,6 @@ function TaskCreateForm() {
       <Row>
         <Col md={5} lg={8} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={4}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >           
-            <div className="d-md-none">{textFields}</div>
-          </Container>
         </Col>
       </Row>
     </Form>
