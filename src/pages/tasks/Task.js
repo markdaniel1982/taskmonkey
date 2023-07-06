@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { MoreDropdown } from "../../components/MoreDropDown";
+import { axiosRes } from "../../api/axiosDefaults";
 // import Avatar from "../../components/Avatar";
 
 const Task = (props) => {
-    
   const {
     id,
     owner,
-    // profile_id,
-    // profile_image,
     comments_count,
     title,
     content,
@@ -27,26 +26,37 @@ const Task = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/tasks/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/tasks/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container>
       {is_owner && Task && (
         <Card className={styles.Task}>
+          <div className="d-flex align-items-center">
+            {created_on}
+            <span>{updated_on}</span>
+            {is_owner && taskPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
+          </div>
           <Card.Body>
-            {title && <Card.Title className="text-center">{title}</Card.Title>}
-          </Card.Body>
-          <Card.Body>
-            <Media className="align-items-center justify-content-between">
-              {/* <Link to={`/profiles/${profile_id}`}>
-                <Avatar src={profile_image} text={owner} height={40} />
-              </Link> */}
-              <div className="d-flex align-items-center">
-                <span>
-                  Date added: {created_on} | Updated: {updated_on}
-                  {is_owner && taskPage && "..."}
-                </span>
-              </div>
-            </Media>
+            <Card.Body>{title && <Card.Text>{title}</Card.Text>}</Card.Body>
           </Card.Body>
           <Card.Body>{content && <Card.Text>{content}</Card.Text>}</Card.Body>
           <Card.Body>
@@ -59,6 +69,7 @@ const Task = (props) => {
           <Card.Body>
             {status && <Card.Text>Status: {status}</Card.Text>}
           </Card.Body>
+
           <Card.Body>
             <div className={styles.taskBar}>
               <Link to={`/tasks/${id}`}>

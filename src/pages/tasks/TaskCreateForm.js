@@ -15,7 +15,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
-//   const taskPriority = axiosReq.get("/tasks/priority");
+  //   const taskPriority = axiosReq.get("/tasks/priority");
 
   const [taskData, setTaskData] = useState({
     title: "",
@@ -60,117 +60,119 @@ function TaskCreateForm() {
 
   const textFields = (
     <div className="text-center">
-      <Form.Group>
-        <Form.Label>Task title</Form.Label>
-        <Form.Control
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleChange}
-        ></Form.Control>
-      </Form.Group>
-      {errors?.title?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Priority</Form.Label>
-        <Form.Control
-          as="select"
-          name="priority"
-          value={priority}
-          onChange={handleChange}
-        >
-          <option>--- Select a priority ---</option>
-          <option value="1">URGENT</option>
-          <option value="2">Normal</option>
-          <option value="3">Low</option>
-        </Form.Control>
-      </Form.Group>
-      {errors?.priority?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Due Date</Form.Label>
-        <Form.Control
-          type="date"
-          name="due_date"
-          value={due_date}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.due_date?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Privacy</Form.Label>
-        <Form.Control
-          as="select"
-          name="privacy"
-          value={privacy}
-          onChange={handleChange}
-        >
-          <option value="1">Private</option>
-          <option value="2">Public</option>
-        </Form.Control>
-      </Form.Group>
-      {errors?.privacy?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Form.Group>
-        <Form.Label>Status</Form.Label>
-        <Form.Control
-          as="select"
-          name="status"
-          value={status}
-          onChange={handleChange}
-        >
-          <option value="1">Not Started</option>
-          <option value="2">In Progress</option>
-          <option value="3">Complete</option>
-          <option value="4">On Hold</option>
-        </Form.Control>
-      </Form.Group>
-      {errors?.status?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+      <Container className={`${styles.Container}`}>
+        <Form.Group>
+          <Form.Label>Task title</Form.Label>
+          <Form.Control
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+        {errors?.title?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group>
+          <Form.Label>Content</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={6}
+            name="content"
+            value={content}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors?.content?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group>
+          <Form.Label>Priority</Form.Label>
+          <Form.Control
+            as="select"
+            name="priority"
+            value={priority}
+            onChange={handleChange}
+          >
+            <option>--- Select a priority ---</option>
+            <option value="1">URGENT</option>
+            <option value="2">Normal</option>
+            <option value="3">Low</option>
+          </Form.Control>
+        </Form.Group>
+        {errors?.priority?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group>
+          <Form.Label>Due Date</Form.Label>
+          <Form.Control
+            type="date"
+            name="due_date"
+            value={due_date}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        {errors?.due_date?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group>
+          <Form.Label>Privacy</Form.Label>
+          <Form.Control
+            as="select"
+            name="privacy"
+            value={privacy}
+            onChange={handleChange}
+          >
+            <option value="1">Private</option>
+            <option value="2">Public</option>
+          </Form.Control>
+        </Form.Group>
+        {errors?.privacy?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
+        <Form.Group>
+          <Form.Label>Status</Form.Label>
+          <Form.Control
+            as="select"
+            name="status"
+            value={status}
+            onChange={handleChange}
+          >
+            <option value="1">Not Started</option>
+            <option value="2">In Progress</option>
+            <option value="3">Complete</option>
+            <option value="4">On Hold</option>
+          </Form.Control>
+        </Form.Group>
+        {errors?.status?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
 
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Orange}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Orange}`}
-        type="submit"
-      >
-        create
-      </Button>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Orange}`}
+          onClick={() => history.goBack()}
+        >
+          cancel
+        </Button>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.Orange}`}
+          type="submit"
+        >
+          create
+        </Button>
+      </Container>
     </div>
   );
 
