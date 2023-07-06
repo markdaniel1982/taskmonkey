@@ -16,8 +16,6 @@ import TaskEditForm from "./pages/tasks/TaskEditForm";
 function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
-//   const status = task_id.status;
-//   const inProgress = Task.status===2;
 
   return (
     <div className={styles.App}>
@@ -30,7 +28,6 @@ function App() {
             render={() => (
               <TasksPage
               message="Task monkey couldn't find anything with those keywords. Try another, or throw a banana or something"
-            //   filter={`owner__tasks__owner__profile=${profile_id}`}
               />
             )}
           />
@@ -40,8 +37,8 @@ function App() {
             render={() => (                
               <TasksPage
                 message="The monkey couldn't find anything"
-                // filter={`tasks__owner__profile${Task?.owner === profile_id}__status=${2}&ordering=-status__in-progress&`}
-                // filter={`${Task.status===2}`}
+                // eslint-disable-next-line no-restricted-globals
+                filter={`owner__profile__task__status=${2}`}
               />
             )}
           />

@@ -8,6 +8,7 @@ import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Task from "./Task";
+import Comment from "../comments/Comment";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
@@ -22,11 +23,12 @@ function TaskPage() {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: task }] = await Promise.all([
+        const [{ data: task }, {data: comments}] = await Promise.all([
           axiosReq.get(`/tasks/${id}`),
+          axiosReq.get(`/comments/?task=${id}`),
         ]);
         setTask({ results: [task] });
-        console.log(task);
+        setComments(comments);
       } catch (err) {
         console.log(err);
       }
@@ -51,6 +53,15 @@ function TaskPage() {
           ) : comments.results.length ? (
             "Comments"
           ) : null}
+           {comments.results.length ? (
+            comments.results.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))
+          ) : currentUser ? (
+            <span>No comments... yet</span>
+          ) : (
+            <span>No comments... yet</span>
+          )}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2"></Col>
