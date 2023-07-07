@@ -1,5 +1,6 @@
 import React from 'react'
-import { Col, Image } from 'react-bootstrap'
+import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 import styles from "../styles/SignInUpForm.module.css";
 import appStyles from "../App.module.css";
 

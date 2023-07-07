@@ -12,7 +12,7 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import TasksPage from "./pages/tasks/TasksPage";
 import NotFound from "./components/NotFound";
 import TaskEditForm from "./pages/tasks/TaskEditForm";
-import { Image } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
