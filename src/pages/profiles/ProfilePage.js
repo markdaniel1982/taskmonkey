@@ -19,26 +19,37 @@ import {
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
 import { Button, Image } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Task from "../tasks/Task";
+import { fetchMoreData } from "../../utils/utils";
+import NoResults from "../../assets/no-results.png";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [profileTasks, setProfileTasks] = useState({ results: [] });
+
   const currentUser = useCurrentUser();
   const { id } = useParams();
+
   const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
+
   const [profile] = pageProfile.results;
   const is_owner = currentUser?.username === profile?.owner;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{ data: pageProfile }] = await Promise.all([
-          axiosReq.get(`/profiles/${id}`),
-        ]);
+        const [{ data: pageProfile }, { data: profileTasks }] =
+          await Promise.all([
+            axiosReq.get(`/profiles/${id}`),
+            axiosReq.get(`/tasks/?owner__profile=${id}`),
+          ]);
         setProfileData((prevState) => ({
           ...prevState,
           pageProfile: { results: [pageProfile] },
         }));
+        setProfileTasks(profileTasks);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -63,6 +74,9 @@ function ProfilePage() {
             <Col xs={3} className="my-2">
               <div>{profile?.tasks_count}</div>
               <div>tasks</div>
+            </Col>
+            <Col xs={3} className="my-2">
+              <div>{profile?.comments_count}</div>
             </Col>
           </Row>
         </Col>
@@ -93,15 +107,30 @@ function ProfilePage() {
   const mainProfileTasks = (
     <>
       <hr />
-      <p className="text-center">Profile owner's tasks</p>
+      <p className="text-center">{profile?.owner}'s tasks</p>
       <hr />
+      {profileTasks.results.length ? (
+        <InfiniteScroll
+          children={profileTasks.results.map((task) => (
+            <Task key={task.id} {...task} setTasks={setProfileTasks} />
+          ))}
+          dataLength={profileTasks.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!profileTasks.next}
+          next={() => fetchMoreData(profileTasks, setProfileTasks)}
+        />
+      ) : (
+        <Asset
+          src={NoResults}
+          message={`No results found, ${profile?.owner} hasn't posted yet.`}
+        />
+      )}
     </>
   );
 
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <ActiveProfiles mobile />
         <Container className={appStyles.Content}>
           {hasLoaded ? (
             <>
