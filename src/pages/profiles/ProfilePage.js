@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
 import Asset from "../../components/Asset";
-
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
 import ActiveProfiles from "./ActiveProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
@@ -23,6 +19,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Task from "../tasks/Task";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
+import { ProfileEditDropdown } from "../../components/MoreDropDown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -60,6 +57,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+      {profile?.is_owner && <ProfileEditDropdown className="align-self-end" id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -75,9 +73,12 @@ function ProfilePage() {
               <div>{profile?.tasks_count}</div>
               <div>tasks</div>
             </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.comments_count}</div>
-            </Col>
+          </Row>
+          <Row>
+            <Col className="text-muted" >About me:</Col>
+          </Row>
+          <Row>
+            <Col>{profile?.bio}</Col>
           </Row>
         </Col>
         <Col lg={3} className="text-lg-right">

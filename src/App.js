@@ -14,6 +14,9 @@ import NotFound from "./components/NotFound";
 import TaskEditForm from "./pages/tasks/TaskEditForm";
 import { Image } from "react-bootstrap";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -56,7 +59,22 @@ function App() {
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
-          <Route render={() => ( <NotFound />)}/>
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </>
@@ -67,7 +85,7 @@ function App() {
       <Container>
         <Switch>
           <Route exact path="/signin" render={() => <SignInForm />} />
-          <Route exact path="/signup" render={() => <SignUpForm />} />          
+          <Route exact path="/signup" render={() => <SignUpForm />} />
         </Switch>
       </Container>
       <div className="text-center">
@@ -77,21 +95,20 @@ function App() {
             "https://res.cloudinary.com/dexpjjntx/image/upload/v1687949371/taskmonkey_p5rppm.png"
           }
         />
-        <p>Not got an account? click <Link to={"/signin"}>here</Link> to sign up</p>
-        </div>
+        <p>
+          Not got an account? click <Link to={"/signin"}>here</Link> to sign up
+        </p>
+      </div>
     </>
   );
 
   return (
     <>
-    <div className={styles.App}>
+      <div className={styles.App}>
         <NavBar />
-        
 
         {currentUser ? loggedInPage : notLoggedInPage}
-        
-        
-    </div>
+      </div>
     </>
   );
 }
