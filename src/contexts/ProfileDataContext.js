@@ -9,31 +9,32 @@ export const useProfileData = () => useContext(ProfileDataContext);
 export const useSetProfileData = () => useContext(SetProfileDataContext);
 
 export const ProfileDataProvider = ({ children }) => {
-  const [profileData, setProfileData] = useState({
-    // we will use the pageProfile later!
-    pageProfile: { results: [] },
-    popularProfiles: { results: [] },
-  });
-
-  const currentUser = useCurrentUser();
-
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          "/profiles/?ordering=-tasks_count"
-        );
-        setProfileData((prevState) => ({
-          ...prevState,
-          popularProfiles: data,
-        }));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    handleMount();
-  }, [currentUser]);
+    const [profileData, setProfileData] = useState({
+        // we will use the pageProfile later!
+        pageProfile: { results: [] },
+        activeProfiles: { results: [] },
+        tasksCount: { results: []},
+      });
+      const currentUser = useCurrentUser();
+    
+      useEffect(() => {
+        const handleMount = async () => {
+          try {
+            const { data } = await axiosReq.get(
+              "/profiles/?ordering=-tasks_count"
+            );
+            setProfileData((prevState) => ({
+              ...prevState,
+              activeProfiles: data,
+            }));
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        handleMount();
+      }, [currentUser]);
+    
 
   return (
     <ProfileDataContext.Provider value={profileData}>

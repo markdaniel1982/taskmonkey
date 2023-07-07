@@ -1,45 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
-import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { useProfileData } from "../../contexts/ProfileDataContext";
 
-const ActiveProfiles = () => {
-  const [profileData, setProfileData] = useState({
-    // we will use the pageProfile later!
-    pageProfile: { results: [] },
-    activeProfiles: { results: [] },
-    tasksCount: { results: []},
-  });
-  const { activeProfiles } = profileData;
-  const currentUser = useCurrentUser();
+import Profile from "./Profile";
 
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          "/profiles/?ordering=-tasks_count"
-        );
-        setProfileData((prevState) => ({
-          ...prevState,
-          activeProfiles: data,
-        }));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    handleMount();
-  }, [currentUser]);
+const ActiveProfiles = ({ mobile }) => {
+  const { activeProfiles } = useProfileData();
 
   return (
     <Container className={appStyles.BusyMonkeys}>
       {activeProfiles.results.length ? (
         <>
           <p>Our Busiest Monkeys</p>
-          {activeProfiles.results.map((profile) => (            
-            <p key={profile.id}>{profile.owner}</p>
+          {activeProfiles.results.map((profile) => (
+            <Profile key={profile.id} profile={profile} />
           ))}
         </>
       ) : (
