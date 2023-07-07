@@ -13,6 +13,7 @@ import TasksPage from "./pages/tasks/TasksPage";
 import NotFound from "./components/NotFound";
 import TaskEditForm from "./pages/tasks/TaskEditForm";
 import { Image } from "react-bootstrap";
+import ProfilePage from "./pages/profiles/ProfilePage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -54,6 +55,7 @@ function App() {
           <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route render={() => ( <NotFound />)}/>
         </Switch>
       </Container>
