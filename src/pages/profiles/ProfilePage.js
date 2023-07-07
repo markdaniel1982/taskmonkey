@@ -67,7 +67,7 @@ function ProfilePage() {
           />
         </Col>
         <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
+          <h3 className="m-2 text-capitalize">{profile?.owner}</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={3} className="my-2">
               <div>{profile?.tasks_count}</div>
@@ -75,10 +75,10 @@ function ProfilePage() {
             </Col>
           </Row>
           <Row>
-            <Col className="text-muted" >About me:</Col>
+            <Col className="m-3 text-muted" >About me:</Col>
           </Row>
           <Row>
-            <Col>{profile?.bio}</Col>
+            <Col className="m-1">{profile?.bio}</Col>
           </Row>
         </Col>
         <Col lg={3} className="text-lg-right">

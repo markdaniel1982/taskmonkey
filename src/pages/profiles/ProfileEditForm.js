@@ -28,7 +28,7 @@ const ProfileEditForm = () => {
   const [profileData, setProfileData] = useState({
     name: "",
     content: "",
-    image: "",
+    profile_image: "",
   });
   const { name, content, image } = profileData;
 
@@ -74,7 +74,7 @@ const ProfileEditForm = () => {
       const { data } = await axiosReq.put(`/profiles/${id}`, formData);
       setCurrentUser((currentUser) => ({
         ...currentUser,
-        profile_image: data.image,
+        image: data.image,
       }));
       history.goBack();
     } catch (err) {
