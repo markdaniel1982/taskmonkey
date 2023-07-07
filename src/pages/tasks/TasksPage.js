@@ -10,8 +10,9 @@ import Asset from "../../components/Asset";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/TasksPage.module.css";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -19,7 +20,11 @@ import { fetchMoreData } from "../../utils/utils";
 import ActiveProfiles from "../profiles/ActiveProfiles";
 
 function TasksPage({ message, filter = "" }) {
+  const { id } = useParams();
   const [tasks, setTasks] = useState({ results: [] });
+  const [comments, setComments] = useState({ results: [] });
+  const currentUser = useCurrentUser();
+
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
 
@@ -28,8 +33,12 @@ function TasksPage({ message, filter = "" }) {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const { data } = await axiosReq.get(`/tasks/?${filter}search=${query}`);
-        setTasks(data);
+        const [{ data: task }, { data: comments }] = await Promise.all([
+          axiosReq.get(`/tasks/?${filter}search=${query}`),
+          axiosReq.get(`/comments/?task=${id}`),
+        ]);
+        setTasks({ results: [task] });
+        setComments(comments);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -44,7 +53,7 @@ function TasksPage({ message, filter = "" }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname]);
+}, [id, comments, filter, query, pathname, currentUser]);
 
   return (
     <Row className="h-100">
