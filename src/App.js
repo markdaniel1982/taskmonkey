@@ -46,7 +46,7 @@ function App() {
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
-                filter={`tasks__owner__task__status=${3}&ordering=-due_date&`}
+                filter={`currentUser__${profile_id}?__task__status=${3}&ordering=-due_date&`}
               />
             )}
           />

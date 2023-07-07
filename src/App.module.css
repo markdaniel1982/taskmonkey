@@ -9,8 +9,18 @@
 }
 
 .LogoHome {
-    height: 80vh;
-    
+    height: 80vh;    
+}
+
+.BusyMonkeys {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 2px;
+    border: 1px solid #dadadf;
+    text-transform: capitalize;
 }
 
 .Content {
