@@ -51,7 +51,7 @@ function TaskPage() {
             <CommentCreateForm
               profile_id={currentUser.profile_id}
               profileImage={profile_image}
-              post={id}
+              task={id}
               setTask={setTask}
               setComments={setComments}
             />
@@ -74,7 +74,10 @@ function TaskPage() {
               next={() => fetchMoreData(comments, setComments)}
             />
           ) : currentUser ? (
+            <>
+            <Asset spinner />            
             <span>No comments yet, be the first to comment!</span>
+            </>
           ) : (
             <span></span>
           )}
