@@ -33,7 +33,7 @@ function ProfilePage() {
     const fetchData = async () => {
       try {
         const [{ data: pageProfile }] = await Promise.all([
-          axiosReq.get(`/profiles/${id}/`),
+          axiosReq.get(`/profiles/${id}`),
         ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -63,14 +63,6 @@ function ProfilePage() {
             <Col xs={3} className="my-2">
               <div>{profile?.tasks_count}</div>
               <div>tasks</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.followers_count}</div>
-              <div>followers</div>
-            </Col>
-            <Col xs={3} className="my-2">
-              <div>{profile?.following_count}</div>
-              <div>following</div>
             </Col>
           </Row>
         </Col>
