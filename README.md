@@ -1,6 +1,6 @@
 # Task Monkey - Productivity App
 
-Developer: Shubham Sinha
+Developer: Mark Daniel
 
 ![Mockup image](***)
 
