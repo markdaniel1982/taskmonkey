@@ -26,7 +26,7 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-      console.log(err);
+    //   console.log(err);
     }
   };
 
@@ -41,13 +41,7 @@ const NavBar = () => {
   );
   const loggedInIcons = (
     <>
-      {/* <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to={"/my-tasks"}
-      >
-        <i className="fa-solid fa-list"></i>My Tasks
-      </NavLink> */}
+
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}

@@ -54,7 +54,7 @@ function TaskEditForm() {
                 is_owner
             }) : history.push('/')
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     };
 
@@ -83,7 +83,7 @@ function TaskEditForm() {
       await axiosReq.put(`/tasks/${id}/`, formData);
       history.push(`/tasks/${id}`);
     } catch (err) {
-      console.log(err);
+    //   console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
