@@ -17,6 +17,10 @@ import ProfilePage from "./pages/profiles/ProfilePage";
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import LogoComponent from "./components/LogoComponent";
+import ActiveProfiles from "./pages/profiles/ActiveProfiles";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -30,17 +34,24 @@ function App() {
             exact
             path="/"
             render={() => (
-              <TasksPage message="Task monkey couldn't find anything with those keywords. Try another, or throw a banana or something" />
+              <>
+                <Container>
+                  <Row>
+                    <Col className="align-item-center"><LogoComponent /></Col>
+                    <Col xs lg="4"><ActiveProfiles /></Col>
+                  </Row>
+                </Container>
+              </>
             )}
           />
           <Route
             exact
-            path={"/in-progress"}
+            path={"/my-tasks"}
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
                 // eslint-disable-next-line no-restricted-globals
-                filter={`currentUser__${profile_id}?__owner__status=${2}`}
+                filter={`tasks__${profile_id}?__status=${2}`}
               />
             )}
           />
