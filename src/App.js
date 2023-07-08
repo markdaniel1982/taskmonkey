@@ -9,7 +9,6 @@ import SignInForm from "./pages/auth/SignInForm";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import TaskPage from "./pages/tasks/TaskPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
-import TasksPage from "./pages/tasks/TasksPage";
 import NotFound from "./components/NotFound";
 import TaskEditForm from "./pages/tasks/TaskEditForm";
 import Image from "react-bootstrap/Image";
@@ -24,7 +23,6 @@ import Row from "react-bootstrap/Row";
 
 function App() {
   const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";
 
   const loggedInPage = (
     <>
@@ -48,18 +46,7 @@ function App() {
                 </Container>
               </>
             )}
-          />
-          {/* <Route
-            exact
-            path={"/my-tasks"}
-            render={() => (
-              <TasksPage
-                message="The monkey couldn't find anything"
-                // eslint-disable-next-line no-restricted-globals
-                // filter={`currentUser__tasks__${profile_id}?__task.status=${2}&ordering=-due_date&`}
-              />
-            )}
-          /> */}
+          />          
           <Route
             exact
             path={"/tasks/completed"}

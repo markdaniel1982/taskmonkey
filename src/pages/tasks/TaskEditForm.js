@@ -16,7 +16,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskEditForm() {
   const [errors, setErrors] = useState({});
-  //   const taskPriority = axiosReq.get("/tasks/priority");
 
   const [taskData, setTaskData] = useState({
     title: "",

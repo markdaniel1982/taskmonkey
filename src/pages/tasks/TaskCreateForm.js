@@ -15,7 +15,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 function TaskCreateForm() {
   const [errors, setErrors] = useState({});
-  //   const taskPriority = axiosReq.get("/tasks/priority");
 
   const [taskData, setTaskData] = useState({
     title: "",
