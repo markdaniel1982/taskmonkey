@@ -2,9 +2,9 @@
 
 Developer: Mark Daniel
 
-![Mockup image](***)
+![Mockup image](documentation/assets/responsive.png)
 
-[View live website](***)
+[View live website](https://taskmonkey-fcc370ffbd74.herokuapp.com/)
 
 ## Table of Contents
 
@@ -70,13 +70,19 @@ Developer: Mark Daniel
 
 # About
 
-***
+ - Task Monkey is a productivity/task manager app to help users keep a visual list of important tasks, appointments and anything else that needs to be remembered.
 
 ---
 
 ## Project Goals
 
+ - The goal for this project was to build a platform for users to keep track of important items, which can then be filtered by date, completed status or priority.
 
+Key functionality Goals
+ - Simple and intuitive navigation
+ - User authentication
+ - User profiles (to allow future implementation of project - See #Future-Enhancements)
+ - 
 
 ### User Goals
 
