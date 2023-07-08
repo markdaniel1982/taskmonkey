@@ -15,6 +15,7 @@ const LogoComponent = () => {
           src={
             "https://res.cloudinary.com/dexpjjntx/image/upload/v1687949371/taskmonkey_p5rppm.png"
           }
+          alt="logo"
         />
       </Col>
   )
