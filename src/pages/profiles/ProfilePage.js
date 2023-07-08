@@ -3,7 +3,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Asset from "../../components/Asset";
-import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import ActiveProfiles from "./ActiveProfiles";
@@ -15,7 +14,6 @@ import {
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Task from "../tasks/Task";
 import { fetchMoreData } from "../../utils/utils";
@@ -61,11 +59,7 @@ function ProfilePage() {
       {profile?.is_owner && <ProfileEditDropdown className="align-self-end" id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
-          <Image
-            className={styles.ProfileImage}
-            roundedCircle
-            src={profile?.image}
-          />
+
         </Col>
         <Col lg={6}>
           <h3 className="m-2 text-capitalize">{profile?.owner}</h3>
