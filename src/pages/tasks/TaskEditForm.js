@@ -212,7 +212,7 @@ function TaskEditForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col md={5} lg={8} className="d-none d-md-block p-0 p-md-2">
+        <Col md={12} lg={8} className="d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
