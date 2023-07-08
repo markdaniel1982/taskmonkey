@@ -37,32 +37,43 @@ function App() {
               <>
                 <Container>
                   <Row>
-                    <Col className="align-item-center"><LogoComponent /></Col>
-                    <Col xs lg="4"><ActiveProfiles /></Col>
+                    <Col className="align-items-center">
+                      <LogoComponent />
+                      <h2>Click on your profile or add a task to get started</h2>
+                    </Col>
+                    <Col xs lg="4">
+                      <ActiveProfiles />
+                    </Col>
                   </Row>
                 </Container>
               </>
             )}
           />
-          <Route
+          {/* <Route
             exact
             path={"/my-tasks"}
             render={() => (
               <TasksPage
                 message="The monkey couldn't find anything"
                 // eslint-disable-next-line no-restricted-globals
-                filter={`tasks__${profile_id}?__status=${2}`}
+                // filter={`currentUser__tasks__${profile_id}?__task.status=${2}&ordering=-due_date&`}
               />
             )}
-          />
+          /> */}
           <Route
             exact
-            path={"/completed"}
+            path={"/tasks/completed"}
             render={() => (
-              <TasksPage
-                message="The monkey couldn't find anything"
-                filter={`currentUser__${profile_id}?__task__status=${3}&ordering=-due_date&`}
-              />
+              <>
+                <Container>
+                  <Row className={appStyles.Contruction}>
+                    <Col className="align-items-center" md-8 width={200} >
+                      <LogoComponent />
+                      <h1>Under Construction</h1>
+                    </Col>
+                  </Row>
+                </Container>
+              </>
             )}
           />
 

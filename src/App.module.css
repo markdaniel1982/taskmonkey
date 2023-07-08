@@ -30,6 +30,13 @@
   border: 1px solid #dadadf;
 }
 
+.Construction {
+    display: flex!important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .FillerImage {
   object-fit: cover;
   height: 100%;

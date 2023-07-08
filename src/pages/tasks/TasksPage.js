@@ -21,7 +21,7 @@ import ActiveProfiles from "../profiles/ActiveProfiles";
 
 function TasksPage({ message, filter = "" }) {
   const { id } = useParams();
-  const [tasks, setTasks] = useState({ results: [] });
+  const [tasks, setTasks] = useState({ results: [id] });
   const [comments, setComments] = useState({ results: [] });
   const currentUser = useCurrentUser();
 
