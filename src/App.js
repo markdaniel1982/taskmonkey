@@ -54,7 +54,7 @@ function App() {
               <>
                 <Container>
                   <Row className={appStyles.Contruction}>
-                    <Col className="align-items-center" md-8 width={200} >
+                    <Col className="align-items-center" md-8="true" width={200} >
                       <LogoComponent />
                       <h1>Under Construction</h1>
                     </Col>
