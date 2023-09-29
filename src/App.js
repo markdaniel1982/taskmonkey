@@ -37,7 +37,9 @@ function App() {
                   <Row>
                     <Col className="align-items-center">
                       <LogoComponent />
-                      <h2>Click on your profile or add a task to get started</h2>
+                      <h2>
+                        Click on your profile or add a task to get started
+                      </h2>
                     </Col>
                     <Col xs lg="4">
                       <ActiveProfiles />
@@ -46,24 +48,9 @@ function App() {
                 </Container>
               </>
             )}
-          />          
-          <Route
-            exact
-            path={"/tasks/completed"}
-            render={() => (
-              <>
-                <Container>
-                  <Row className={appStyles.Contruction}>
-                    <Col className="align-items-center" md-8="true" width={200} >
-                      <LogoComponent />
-                      <h1>Under Construction</h1>
-                    </Col>
-                  </Row>
-                </Container>
-              </>
-            )}
           />
-
+          
+          <Route exact path="/tasks/completed" render={() => <ProfilePage status='3' />} />
           <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />

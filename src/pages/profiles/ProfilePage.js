@@ -20,7 +20,8 @@ import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropDown";
 
-function ProfilePage() {
+function ProfilePage(props) {
+  const { status } = props
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileTasks, setProfileTasks] = useState({ results: [] });
 
@@ -39,7 +40,7 @@ function ProfilePage() {
         const [{ data: pageProfile }, { data: profileTasks }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}`),
-            axiosReq.get(`/tasks/?owner__profile=${id}`),
+            axiosReq.get(`/tasks/?owner__profile=${id}?status=${status}`),           
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -52,7 +53,7 @@ function ProfilePage() {
       }
     };
     fetchData();
-  }, [id, setProfileData]);
+  }, [id, setProfileData, status]);
 
   const mainProfile = (
     <>

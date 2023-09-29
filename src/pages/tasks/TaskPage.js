@@ -19,7 +19,7 @@ import { fetchMoreData } from "../../utils/utils";
 
 function TaskPage() {
   const { id } = useParams();
-  const [task, setTask] = useState({ results: [] });
+  const [task, setTask, setStatus] = useState({ results: [] });
 
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
@@ -28,19 +28,20 @@ function TaskPage() {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: task }, { data: comments }] = await Promise.all([
-          axiosReq.get(`/tasks/${id}`),
+        const [{ data: task }, { data: comments }, { data: status }] = await Promise.all([
+          axiosReq.get(`/tasks/${id}`), (`/tasks/${Task?.status}`),
           axiosReq.get(`/comments/?task=${id}`),
         ]);
         setTask({ results: [task] });
+        setStatus({ results:[status] });
         setComments(comments);
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
 
     handleMount();
-  }, [id]);
+  }, [id, setTask, setStatus]);
 
   return (
     <Row className="h-100">
