@@ -40,34 +40,34 @@ const NavBar = () => {
     </NavLink>
   );
   const loggedInIcons = (
-    <>      
+    <>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}/tasks/not-started`}
       >
-        <i class="fa-regular fa-circle-xmark"></i>Not Started
+        <i className="fa-regular fa-circle-xmark"></i>Not Started
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}/tasks/in-progress`}
       >
-        <i class="fa-solid fa-bars-progress"></i>In Progress
+        <i className="fa-solid fa-bars-progress"></i>In Progress
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}/tasks/completed`}
       >
-        <i class="fa-regular fa-circle-check"></i>Completed
+        <i className="fa-regular fa-circle-check"></i>Completed
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}/tasks/on-hold`}
       >
-        <i class="fa-regular fa-hand"></i>On Hold
+        <i className="fa-regular fa-hand"></i>On Hold
       </NavLink>
       <NavLink
         className={styles.NavLink}
