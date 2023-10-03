@@ -51,7 +51,8 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to={"/tasks/completed"}
+        to={`/profiles/${currentUser?.profile_id}/tasks/completed`}
+
       >
         <i className="fa-solid fa-check"></i>Completed tasks
       </NavLink>

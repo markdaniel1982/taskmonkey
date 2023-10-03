@@ -40,7 +40,7 @@ function ProfilePage(props) {
         const [{ data: pageProfile }, { data: profileTasks }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}`),
-            axiosReq.get(`/tasks/?owner__profile=${id}?status=${status}`),           
+            axiosReq.get(`/tasks/?status=${status}`),           
           ]);
         setProfileData((prevState) => ({
           ...prevState,
