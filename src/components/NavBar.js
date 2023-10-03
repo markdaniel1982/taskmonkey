@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -26,7 +26,7 @@ const NavBar = () => {
       setCurrentUser(null);
       removeTokenTimestamp();
     } catch (err) {
-    //   console.log(err);
+      //   console.log(err);
     }
   };
 
@@ -40,26 +40,44 @@ const NavBar = () => {
     </NavLink>
   );
   const loggedInIcons = (
-    <>
-
+    <>      
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/profiles/${currentUser?.profile_id}/tasks/not-started`}
+      >
+        <i class="fa-regular fa-circle-xmark"></i>Not Started
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/profiles/${currentUser?.profile_id}/tasks/in-progress`}
+      >
+        <i class="fa-solid fa-bars-progress"></i>In Progress
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/profiles/${currentUser?.profile_id}/tasks/completed`}
+      >
+        <i class="fa-regular fa-circle-check"></i>Completed
+      </NavLink>
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/profiles/${currentUser?.profile_id}/tasks/on-hold`}
+      >
+        <i class="fa-regular fa-hand"></i>On Hold
+      </NavLink>
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
       >
         <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to={`/profiles/${currentUser?.profile_id}/tasks/completed`}
-
-      >
-        <i className="fa-solid fa-check"></i>Completed tasks
-      </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-sign-out-alt"></i>Sign out
       </NavLink>
-      
     </>
   );
   const loggedOutIcons = (

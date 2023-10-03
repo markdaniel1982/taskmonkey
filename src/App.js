@@ -50,11 +50,15 @@ function App() {
             )}
           />
           
-          <Route exact path="/profiles/:id/tasks/completed" render={() => <ProfilePage status={3} />} />
+          <Route exact path="/profiles/:id/tasks/not-started" render={() => <ProfilePage status={"1"} />} />
+          <Route exact path="/profiles/:id/tasks/in-progress" render={() => <ProfilePage status={"2"} />} />
+          <Route exact path="/profiles/:id/tasks/completed" render={() => <ProfilePage status={"3"} />} />
+          <Route exact path="/profiles/:id/tasks/on-hold" render={() => <ProfilePage status={"4"} />} />
+
           <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
-          <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage status={1} />} />
           <Route
             exact
             path="/profiles/:id/edit/username"
