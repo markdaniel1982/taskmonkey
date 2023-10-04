@@ -132,7 +132,7 @@ function ProfilePage(props) {
           {hasLoaded ? (
             <>
               {mainProfile}
-              {mainProfileTasks}
+              {profile?.is_owner && [mainProfileTasks]}
             </>
           ) : (
             <Asset spinner />

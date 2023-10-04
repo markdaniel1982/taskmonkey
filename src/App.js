@@ -58,7 +58,7 @@ function App() {
           <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
-          <Route exact path="/profiles/:id" render={() => <ProfilePage status={1} />} />
+          <Route exact path="/profiles/:id" render={() => <ProfilePage status={""} />} />
           <Route
             exact
             path="/profiles/:id/edit/username"
