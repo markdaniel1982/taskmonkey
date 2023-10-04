@@ -10,6 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
@@ -41,7 +42,7 @@ function TaskEditForm() {
                 privacy,
                 priority,
                 status,
-                is_owner
+                is_owner,
             } = data;
 
             is_owner ? setTaskData({
@@ -51,10 +52,10 @@ function TaskEditForm() {
                 privacy,
                 priority,
                 status,
-                is_owner
+                is_owner,
             }) : history.push('/')
         } catch (err) {
-            // console.log(err)
+            console.log(err)
         }
     };
 
@@ -77,13 +78,14 @@ function TaskEditForm() {
     formData.append("priority", priority);
     formData.append("due_date", due_date);
     formData.append("privacy", privacy);
-    formData.append("status", status);
+    formData.set("status", status);
+    // console.log(formData)
 
     try {
       await axiosReq.put(`/tasks/${id}/`, formData);
       history.push(`/tasks/${id}`);
     } catch (err) {
-    //   console.log(err);
+      console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -146,7 +148,6 @@ function TaskEditForm() {
           <Form.Control
             type="date"
             name="due_date"
-
             value={due_date}
             onChange={handleChange}                        
           />
@@ -164,6 +165,7 @@ function TaskEditForm() {
             value={privacy}
             onChange={handleChange}
           >
+            <option>--- Select privacy ---</option>
             <option value="1">Private</option>
             <option value="2">Public</option>
           </Form.Control>
@@ -181,6 +183,7 @@ function TaskEditForm() {
             value={status}
             onChange={handleChange}
           >
+            {/* <option>--- Select status ---</option> */}
             <option value="1">Not Started</option>
             <option value="2">In Progress</option>
             <option value="3">Complete</option>

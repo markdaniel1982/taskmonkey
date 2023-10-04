@@ -20,6 +20,7 @@ import { fetchMoreData } from "../../utils/utils";
 function TaskPage() {
   const { id } = useParams();
   const [task, setTask, setStatus] = useState({ results: [] });
+  
 
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
@@ -33,7 +34,7 @@ function TaskPage() {
           axiosReq.get(`/comments/?task=${id}`),
         ]);
         setTask({ results: [task] });
-        setStatus({ results:[status] });
+        setStatus({ results: [status] });
         setComments(comments);
       } catch (err) {
         console.log(err);
