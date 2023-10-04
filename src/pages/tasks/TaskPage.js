@@ -19,7 +19,7 @@ import { fetchMoreData } from "../../utils/utils";
 
 function TaskPage() {
   const { id } = useParams();
-  const [task, setTask, setStatus] = useState({ results: [] });
+  const [task, setTask] = useState({ results: [] });
   
 
   const currentUser = useCurrentUser();
@@ -29,12 +29,11 @@ function TaskPage() {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const [{ data: task }, { data: comments }, { data: status }] = await Promise.all([
-          axiosReq.get(`/tasks/${id}`), (`/tasks/${Task?.status}`),
+        const [{ data: task }, { data: comments }] = await Promise.all([
+          axiosReq.get(`/tasks/${id}`),
           axiosReq.get(`/comments/?task=${id}`),
         ]);
         setTask({ results: [task] });
-        setStatus({ results: [status] });
         setComments(comments);
       } catch (err) {
         console.log(err);
@@ -42,7 +41,7 @@ function TaskPage() {
     };
 
     handleMount();
-  }, [id, setTask, setStatus]);
+  }, [id, setTask]);
 
   return (
     <Row className="h-100">
