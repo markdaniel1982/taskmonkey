@@ -74,7 +74,10 @@ const Task = (props) => {
           <Card.Body>
             {due_date && <Card.Text>Due date: {due_date}</Card.Text>}
           </Card.Body>
-          <Card.Body>{privacy && <Card.Text>Privacy: </Card.Text>}</Card.Body>
+                    {/* 
+                    Privacy to be added in future iteration 
+                    */}
+          {/* <Card.Body>{privacy && <Card.Text>Privacy: </Card.Text>}</Card.Body> */} 
           <Card.Body>
             {status && <Card.Text>Status: {status}</Card.Text>}
           </Card.Body>
