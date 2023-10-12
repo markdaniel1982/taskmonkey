@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
+// import btnStyles from "../../styles/Button.module.css";
 import ActiveProfiles from "./ActiveProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
@@ -13,15 +13,15 @@ import {
   useProfileData,
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Task from "../tasks/Task";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from "../../assets/no-results.png";
 import { ProfileEditDropdown } from "../../components/MoreDropDown";
 
-function ProfilePage(props) {
-  const { status } = props
+function ProfilePage() {
+//   const { status } = props
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileTasks, setProfileTasks] = useState({ results: [] });
 
@@ -40,7 +40,7 @@ function ProfilePage(props) {
         const [{ data: pageProfile }, { data: profileTasks }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}`),
-            axiosReq.get(`/tasks/?status=${status}`),           
+            axiosReq.get(`/tasks/?status=${''}`),           
           ]);
         setProfileData((prevState) => ({
           ...prevState,
@@ -53,7 +53,7 @@ function ProfilePage(props) {
       }
     };
     fetchData();
-  }, [id, setProfileData, status]);
+  }, [id, setProfileData]);
 
   const mainProfile = (
     <>
@@ -76,26 +76,7 @@ function ProfilePage(props) {
           <Row>
             <Col className="m-1">{profile?.bio}</Col>
           </Row>
-        </Col>
-        <Col lg={3} className="text-lg-right">
-          {currentUser &&
-            !is_owner &&
-            (profile?.following_id ? (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
-                onClick={() => {}}
-              >
-                unfollow
-              </Button>
-            ) : (
-              <Button
-                className={`${btnStyles.Button} ${btnStyles.Black}`}
-                onClick={() => {}}
-              >
-                follow
-              </Button>
-            ))}
-        </Col>
+        </Col> 
         {profile?.content && <Col className="p-3">{profile.content}</Col>}
       </Row>
     </>
