@@ -329,9 +329,14 @@ NavBar Mobile Expanded
 - Logo and wePbsite name both are links for home page
 - Navbar consists of a links to a signin page and signup page for logged out users
 - Authenticated/Signed in user can see additional icons as follows:
+  - Home: Take users to home page
   - Add tasks: It opens the task create form page
-  - In Progress: Shows tasks which users have as on-going
-  - Completed tasks: Shows tasks which users have marked as completed
+  
+  - Not Started: displays all tasks marked as Not started (status 1)
+  - In Progress: Shows tasks which users have as on-going (status 2)
+  - Completed tasks: Shows tasks which users have marked as completed (status 3)
+  - On Hold: displays tasks marked as On Hold (status 4)
+
   - Logout: This is used for user to logout
   - Profile: This shows the user avatar and opens the user's profile page
 - Feature is fully responsive and on smaller screen sizes it coverts into a 'Hamburger menu'
