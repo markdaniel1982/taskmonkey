@@ -220,13 +220,6 @@ Key functionality Goals
 
 ## Design
 
-### Colours
-
-The colours used in the design were taken from [Color Palettes](https://colorpalettes.net/color-palette-4233/)
-
-![Color Palettes](documentation/assets/colorpalettes.png)
-
-
 ### Fonts
 
 The font chosen was [DM Sans](https://fonts.google.com/specimen/DM+Sans) from googlefonts
@@ -368,7 +361,6 @@ NavBar Mobile Expanded
 - This shows a list of the users that have added the highest amount of tasks when logged in, and the site logo when logged out
 
 ![Home Logged in](documentation/assets/homeloggedin.png)
-![Home Logged Out](documentation/assets/homeloggedout.png)
 
 
 
@@ -412,28 +404,31 @@ NavBar Mobile Expanded
 
 ![Change Password Page](documentation/assets/changepassword.png)
 
-### Unresolved Bugs
- - Edit profile - I encountered and issue when trying to edit the profile bio where the console showed an error regarding an unmounted component. I tried extensively to find a resolution, but even with help from tutor support, this was unable to be resolved before my submission deadline
-  ![Edit Profile Bug](documentation/assets/editprofilerrorfull_unresolved.png)
- - Avatar images not displaying - the avatar images are not displaying in the 'Active Profiles' section. Again, I was unable to find time to get this resolved in this iteration
- - Filters - I have been unable to get the pages to display the correct filtered information. I wanted a separate list of tasks to be displayed based on the status (not started, in progress, completed, on hold), but with my knowledge limited to what had been shown in the moments walkthrough, i was unable to translate that into a functioning solution in my app
+### Unresolved Bugs 
+
  - Logo image overlap on homepage on mobile devices
+
+### Fixed Bugs
+- Edit profile - I encountered and issue when trying to edit the profile bio where the console showed an error regarding an unmounted component. 
+  ![Edit Profile Bug](documentation/assets/editprofilerrorfull_unresolved.png)
+
+  This was fixed by researching extensively and realising that I had set the serializer field type incorrectly in the backend. Once the fields had been changed from ReadOnlyField to a suitable replacement, depending on the field type required, all worked as intended
+
+ - Avatar images not displaying - the avatar images are not displaying in the 'Active Profiles' section.
+ 
+ This was fixed by updating the information that was being called from the API in the AxiosReq
+
+ - Filters - I have been unable to get the pages to display the correct filtered information. I wanted a separate list of tasks to be displayed based on the status (not started, in progress, completed, on hold), but with my knowledge limited to what had been shown in the moments walkthrough, i was unable to translate that into a functioning solution in my app.
+
+ This was fixed by adding in several more links on the NavBar, and adjusting the routing to allow the page to display the correct information. I have now added a separate navbar link to a page for each of the available Task status options
 
 ### Future Enhancements
 
-- Filter tasks by priority, due date, status
 - upload attachments to keep documents relevant to the task together with the task information
 - Create Teams & Projects for collaborative tasks
 - Edit list view to show a summary which expands to shows detailed view
 - Add a tickbox to mark tasks as complete
 - Reinstate Search Box
-
-##### Search form and filters
-
-- This component has a search bar for user to type and search 
-- This component is provided for user to search all tasks easily by their title, date, status and priority.
-
-Unfortuntely, at a very late stage in production, the search bar was accidently removed without me noticing. This will be re-instated in a later iteration.
 
 ## Validation
 
@@ -494,7 +489,7 @@ Profile Mobile after amendments
 
 ## Testing
 
-Please see [Testing](ddd) for detailed description of all testing undertaken during this build
+Please see [Testing](/TESTING.md) for detailed description of all testing undertaken during this build
  
 ## Deployment
 
